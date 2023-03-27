@@ -8,22 +8,28 @@ class Board
     @rack = Array.new(6) { Array.new(7, 0) }
   end
 
-  def insert_token(token, row, column)
-    row -= 1
+  def insert_token(token, column)
+    row = 0
     column -= 1
 
-    return nil unless valid_input?(row, column)
-    return nil if already_taken?(row, column)
+    return nil unless valid_input?(column)
+    return nil if full?(column)
+
+    row += 1 while already_taken?(row, column)
 
     @rack[row][column] = token
   end
 
-  def valid_input?(row, column)
-    row.between?(0, 5) && column.between?(0, 6)
+  def valid_input?(column)
+    column.between?(0, 6)
   end
 
   def already_taken?(row, column)
     !@rack[row][column].zero?
+  end
+
+  def full?(column)
+    !@rack[5][column].zero?
   end
 
   # rubocop:disable Metrics/MethodLength
