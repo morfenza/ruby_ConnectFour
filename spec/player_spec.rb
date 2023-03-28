@@ -39,4 +39,21 @@ describe Player do
       end
     end
   end
+
+  describe '#choose_token' do
+    context 'when the game chooses between one of two tokens' do
+      it 'correctly sets and return token' do
+        token = 1
+        chosen_token = player.choose_token(1)
+        expect(chosen_token).to eq(token)
+      end
+    end
+
+    context 'when the game chooses an invalid token' do
+      it 'returns nil' do
+        chosen_token = player.choose_token(5)
+        expect(chosen_token).to be_nil
+      end
+    end
+  end
 end
