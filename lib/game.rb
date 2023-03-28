@@ -1,0 +1,42 @@
+# frozen_string_literal: true
+
+# class defining ConnectFour game logic
+class Game
+  def game_over?(cur_player, board)
+    return false if board.rack[0].sum.zero?
+
+    board.rack.each_with_index do |row, row_index|
+      row.each_with_index do |column, column_index|
+        next unless column == cur_player.token
+
+        return true if connection?(cur_player.token, board, row_index, column_index)
+      end
+    end
+  end
+
+  def connection?(token, board, row_index, column_index)
+    horizontal?(token, board, row_index, column_index) ||
+      vertical?(token, board, row_index, column_index) ||
+      diagonal?(token, board, row_index, column_index)
+  end
+
+  def horizontal?(token, board, row_index, column_index)
+  end
+
+  def vertical?(token, board, row_index, column_index)
+  end
+
+  def diagonal?(token, board, row_index, column_index)
+  end
+end
+
+# PSEUDOCODE
+# for each row
+# for each column
+# checks if there is a token
+# if there is:
+# returns true if there is a hor, ver or diag line of four
+# if there is not:
+# next
+
+# returns false
