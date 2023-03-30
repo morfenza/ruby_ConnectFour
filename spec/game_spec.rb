@@ -25,8 +25,8 @@ describe Game do
         # setting a horizontal line on a rack
         allow(board).to receive(:rack).and_return(
           [
-            [0, 1, 1, 2, 1, 2, 0],
-            [0, 1, 1, 1, 1, 0, 0],
+            [2, 1, 1, 2, 1, 2, 0],
+            [1, 1, 1, 1, 2, 0, 0],
             [0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0],
@@ -36,7 +36,7 @@ describe Game do
         allow(cur_player).to receive(:token).and_return(1)
 
         row = 1
-        column = 1
+        column = 0
         result = game.horizontal?(cur_player.token, board, row, column)
 
         expect(result).to be true
@@ -83,8 +83,8 @@ describe Game do
         allow(cur_player).to receive(:token).and_return(1)
 
         row = 0
-        column = 1
-        result = game.vertical?(cur_player, board, row, column)
+        column = 2
+        result = game.vertical?(cur_player.token, board, row, column)
 
         expect(result).to be true
       end
@@ -106,7 +106,7 @@ describe Game do
 
         row = 0
         column = 1
-        result = game.horizontal?(cur_player, board, row, column)
+        result = game.horizontal?(cur_player.token, board, row, column)
 
         expect(result).to be false
       end
