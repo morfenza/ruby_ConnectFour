@@ -40,6 +40,15 @@ class Game
   end
 
   def vertical?(token, board, row_index, column_index)
+    return if row_index < 3
+
+    aux_array = []
+    pivot = row_index
+    below_pivot = row_index - 3
+
+    pivot.downto(below_pivot) { |index| aux_array << board.rack[index][column_index] }
+
+    aux_array.all? { |el| el == token } == true ? true : nil
   end
 
   def diagonal?(token, board, row_index, column_index); end

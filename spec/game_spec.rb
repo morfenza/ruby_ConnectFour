@@ -68,21 +68,21 @@ describe Game do
 
   describe '#vertical?' do
     context 'when there are tokens in a vertical line' do
-      xit 'returns true' do
+      it 'returns true' do
         # setting a vertical line on a rack
         allow(board).to receive(:rack).and_return(
           [
-            [0, 1, 1, 2, 2, 2, 0],
+            [0, 1, 2, 2, 2, 2, 0],
             [0, 1, 1, 1, 2, 0, 0],
             [0, 0, 1, 1, 0, 0, 0],
             [0, 0, 1, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0]
           ]
         )
         allow(cur_player).to receive(:token).and_return(1)
 
-        row = 0
+        row = 4
         column = 2
         result = game.vertical?(cur_player.token, board, row, column)
 
@@ -91,7 +91,7 @@ describe Game do
     end
 
     context 'when there are not tokens in a vertical line' do
-      xit 'returns false' do
+      it 'returns nil' do
         allow(board).to receive(:rack).and_return(
           [
             [0, 1, 1, 2, 1, 2, 0],
@@ -104,11 +104,11 @@ describe Game do
         )
         allow(cur_player).to receive(:token).and_return(1)
 
-        row = 0
-        column = 1
+        row = 2
+        column = 4
         result = game.horizontal?(cur_player.token, board, row, column)
 
-        expect(result).to be false
+        expect(result).to be_nil
       end
     end
   end
@@ -131,7 +131,7 @@ describe Game do
 
         row = 0
         column = 1
-        result = game.diagonal?(cur_player, board, row, column)
+        result = game.diagonal?(cur_player.token, board, row, column)
 
         expect(result).to be true
       end
@@ -153,9 +153,9 @@ describe Game do
 
         row = 0
         column = 1
-        result = game.diagonal?(cur_player, board, row, column)
+        result = game.diagonal?(cur_player.token, board, row, column)
 
-        expect(result).to be false
+        expect(result).to be nil
       end
     end
   end
