@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pry-byebug'
+
 # class defining ConnectFour game logic
 class Game
   def game_over?(cur_player, board)
@@ -21,13 +23,28 @@ class Game
   end
 
   def horizontal?(token, board, row_index, column_index)
+    left = column_index
+    right = column_index + 3
+    while left >= 0
+      if left.negative? || right > 6
+        left -= 1
+        right -= 1
+        next
+      end
+
+      #binding.pry
+
+      return true if (board.rack[row_index][left..right].all? { |el| el == token }) == true
+
+      left -= 1
+      right -= 1
+
+    end
   end
 
-  def vertical?(token, board, row_index, column_index)
-  end
+  def vertical?(token, board, row_index, column_index); end
 
-  def diagonal?(token, board, row_index, column_index)
-  end
+  def diagonal?(token, board, row_index, column_index); end
 end
 
 # PSEUDOCODE

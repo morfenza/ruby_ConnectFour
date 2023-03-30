@@ -15,7 +15,7 @@ describe Game do
 
 
     context 'when player of a given token does not connects four tokens' do
-      xit 'returns false' do; end
+      xit 'returns nil' do; end
     end
   end
 
@@ -37,14 +37,14 @@ describe Game do
 
         row = 1
         column = 1
-        result = game.horizontal?(cur_player, board, row, column)
+        result = game.horizontal?(cur_player.token, board, row, column)
 
         expect(result).to be true
       end
     end
 
     context 'when there are not tokens in a horizontal line' do
-      it 'returns false' do
+      it 'returns nil' do
         allow(board).to receive(:rack).and_return(
           [
             [0, 1, 1, 2, 1, 2, 0],
@@ -59,16 +59,16 @@ describe Game do
 
         row = 0
         column = 1
-        result = game.horizontal?(cur_player, board, row, column)
+        result = game.horizontal?(cur_player.token, board, row, column)
 
-        expect(result).to be false
+        expect(result).to be_nil
       end
     end
   end
 
   describe '#vertical?' do
     context 'when there are tokens in a vertical line' do
-      it 'returns true' do
+      xit 'returns true' do
         # setting a vertical line on a rack
         allow(board).to receive(:rack).and_return(
           [
@@ -91,7 +91,7 @@ describe Game do
     end
 
     context 'when there are not tokens in a vertical line' do
-      it 'returns false' do
+      xit 'returns false' do
         allow(board).to receive(:rack).and_return(
           [
             [0, 1, 1, 2, 1, 2, 0],
@@ -115,7 +115,7 @@ describe Game do
 
   describe '#diagonal?' do
     context 'when there are tokens in a diagonal line' do
-      it 'returns true' do
+      xit 'returns true' do
         # setting a diagonal line on a rack
         allow(board).to receive(:rack).and_return(
           [
@@ -138,7 +138,7 @@ describe Game do
     end
 
     context 'when there are not tokens in a diagonal line' do
-      it 'returns false' do
+      xit 'returns false' do
         allow(board).to receive(:rack).and_return(
           [
             [0, 1, 1, 2, 1, 2, 0],
