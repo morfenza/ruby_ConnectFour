@@ -13,7 +13,6 @@ describe Game do
       xit 'returns true' do; end
     end
 
-
     context 'when player of a given token does not connects four tokens' do
       xit 'returns nil' do; end
     end
@@ -113,9 +112,9 @@ describe Game do
     end
   end
 
-  describe '#diagonal?' do
+  describe '#left_diagonal?' do
     context 'when there are tokens in a diagonal line' do
-      xit 'returns true' do
+      it 'returns true' do
         # setting a diagonal line on a rack
         allow(board).to receive(:rack).and_return(
           [
@@ -129,16 +128,16 @@ describe Game do
         )
         allow(cur_player).to receive(:token).and_return(1)
 
-        row = 0
-        column = 1
-        result = game.diagonal?(cur_player.token, board, row, column)
+        row = 2
+        column = 3
+        result = game.left_diagonal?(cur_player.token, board, row, column)
 
         expect(result).to be true
       end
     end
 
     context 'when there are not tokens in a diagonal line' do
-      xit 'returns false' do
+      it 'returns nil' do
         allow(board).to receive(:rack).and_return(
           [
             [0, 1, 1, 2, 1, 2, 0],
@@ -153,9 +152,56 @@ describe Game do
 
         row = 0
         column = 1
-        result = game.diagonal?(cur_player.token, board, row, column)
+        result = game.left_diagonal?(cur_player.token, board, row, column)
 
-        expect(result).to be nil
+        expect(result).to be_nil
+      end
+    end
+  end
+
+  describe '#right_diagonal?' do
+    context 'when there are tokens in a diagonal line' do
+      it 'returns true' do
+        # setting a diagonal line on a rack
+        allow(board).to receive(:rack).and_return(
+          [
+            [0, 1, 1, 2, 2, 2, 0],
+            [0, 1, 2, 1, 2, 2, 0],
+            [0, 0, 1, 1, 2, 0, 0],
+            [0, 0, 1, 2, 1, 0, 0],
+            [0, 0, 2, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0]
+          ]
+        )
+        allow(cur_player).to receive(:token).and_return(2)
+
+        row = 1
+        column = 5
+        result = game.right_diagonal?(cur_player.token, board, row, column)
+
+        expect(result).to be true
+      end
+    end
+
+    context 'when there are not tokens in a diagonal line' do
+      it 'returns nil' do
+        allow(board).to receive(:rack).and_return(
+          [
+            [0, 1, 1, 2, 1, 2, 0],
+            [0, 0, 1, 1, 2, 0, 0],
+            [0, 0, 2, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0]
+          ]
+        )
+        allow(cur_player).to receive(:token).and_return(2)
+
+        row = 2
+        column = 2
+        result = game.right_diagonal?(cur_player.token, board, row, column)
+
+        expect(result).to be_nil
       end
     end
   end

@@ -51,7 +51,58 @@ class Game
     aux_array.all? { |el| el == token } == true ? true : nil
   end
 
-  def diagonal?(token, board, row_index, column_index); end
+  def diagonal?(token, board, row_index, column_index)
+    left_diagonal?(token, board, row_index, column_index) ||
+      right_diagonal?(token, board, row_index, column_index)
+  end
+
+  def left_diagonal?(token, board, row_index, column_index)
+    aux_array = []
+
+    hor_direction = column_index
+    ver_direction = row_index
+
+    while ver_direction.between?(0, 5)
+      unless hor_direction.between?(0, 6)
+        hor_direction += 1
+        ver_direction += 1
+        next
+      end
+
+      0.upto(3) { |aux| aux_array << board.rack[ver_direction - aux][hor_direction - aux]}
+
+      return true if aux_array.all? { |el| el == token } == true
+
+      aux_array.clear
+
+      hor_direction += 1
+      ver_direction += 1
+    end
+  end
+
+  def right_diagonal?(token, board, row_index, column_index)
+    aux_array = []
+
+    hor_direction = column_index
+    ver_direction = row_index
+
+    while ver_direction.between?(0, 5)
+      unless hor_direction.between?(0, 6)
+        hor_direction -= 1
+        ver_direction += 1
+        next
+      end
+
+      0.upto(3) { |aux| aux_array << board.rack[ver_direction - aux][hor_direction + aux]}
+
+      return true if aux_array.all? { |el| el == token } == true
+
+      aux_array.clear
+
+      hor_direction -= 1
+      ver_direction += 1
+    end
+  end
 end
 
 # PSEUDOCODE
