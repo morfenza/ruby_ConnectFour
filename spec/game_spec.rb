@@ -8,16 +8,6 @@ describe Game do
   let(:board) { instance_double(Board) }
   let(:cur_player) { double('Ian') }
 
-  describe '#game_over?' do
-    context 'when player of a given token connects four tokens' do
-      xit 'returns true' do; end
-    end
-
-    context 'when player of a given token does not connects four tokens' do
-      xit 'returns nil' do; end
-    end
-  end
-
   describe '#horizontal?' do
     context 'when there are tokens in a horizontal line' do
       it 'returns true' do
