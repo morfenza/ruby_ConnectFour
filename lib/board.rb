@@ -36,7 +36,7 @@ class Board
   def display_rack
     filled = "\u25cf"
     unfilled = "\u25cb"
-    @rack.each do |row|
+    @rack.reverse_each do |row|
       row.each do |column|
         print "\e[31m#{filled}\e[0m " if column == 1 # red
         print "\e[32m#{filled}\e[0m " if column == 2 # green
