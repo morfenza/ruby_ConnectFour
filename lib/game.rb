@@ -10,13 +10,13 @@ class Game
   include Verify
   include Message
 
-  def new_game
-    board = Board.new
-    player1 = Player.new
-    player2 = Player.new
+  def initialize
+    @board = Board.new
+    @player1 = Player.new
+    @player2 = Player.new
   end
 
-  def set_names
+  def set_names(player1, player2)
     ask_name(player1, 1)
     player1.choose_token(1)
 

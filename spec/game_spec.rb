@@ -9,15 +9,15 @@ describe Game do
   let(:board) { instance_double(Board) }
   let(:cur_player) { double('Ian') }
 
-  describe '#new_game' do
+  describe '#initialize' do
     it 'creates board object' do
       expect(Board).to receive(:new)
-      game.new_game
+      Game.new
     end
 
     it 'creates player objects' do
       expect(Player).to receive(:new).twice
-      game.new_game
+      Game.new
     end
   end
 
