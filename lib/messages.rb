@@ -28,12 +28,4 @@ module Message
   def display_draw_message
     puts "It's a draw, no one wins!"
   end
-
-  def display_play_again
-    puts <<~AGAIN
-      # Play another game?
-        [1] - Again!
-        [2] - Quit
-    AGAIN
-  end
 end
