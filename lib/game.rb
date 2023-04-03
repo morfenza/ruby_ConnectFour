@@ -10,11 +10,35 @@ class Game
   include Verify
   include Message
 
+  attr_reader :player1, :player2, :board
+
   def initialize
     @board = Board.new
     @player1 = Player.new
     @player2 = Player.new
   end
+
+  # rubocop:disable Metrics/MethodLength
+  def play_game(player1 = self.player1, player2 = self.player2, board = self.board)
+    welcoming_message
+    set_names(player1, player2)
+
+    loop do
+      board.display_rack
+      result = play_round(player1, player2, board)
+      if result == 1
+        board.display_rack
+        return display_player_victory(player1.name, player1.token)
+      elsif result == 2
+        board.display_rack
+        return display_player_victory(player2.name, player2.token)
+      elsif draw?(board)
+        board.display_rack
+        return display_draw_message
+      end
+    end
+  end
+  # rubocop:enable Metrics/MethodLength
 
   def play_turn(player, board = self.board)
     loop do
@@ -27,8 +51,15 @@ class Game
   end
 
   def play_round(player1 = self.player1, player2 = self.player2, board = self.board)
+    display_player_turn(player1.name, player1.token)
     return 1 if play_turn(player1, board) == true
+
+    board.display_rack
+
+    display_player_turn(player2.name, player2.token)
     return 2 if play_turn(player2, board) == true
+
+    board.display_rack
   end
 
   def set_names(player1 = self.player1, player2 = self.player2)
@@ -40,7 +71,7 @@ class Game
   end
 
   def ask_name(player, player_num)
-    puts "Player #1#{player_num}, enter your name: "
+    puts "Player ##{player_num}, enter your name: "
     loop do
       input = gets
       input ||= ''
@@ -53,3 +84,6 @@ class Game
     end
   end
 end
+
+g = Game.new
+g.play_game
