@@ -21,6 +21,23 @@ describe Game do
     end
   end
 
+  describe 'set_names' do
+    let(:player1) { instance_double(Player) }
+    let(:player2) { instance_double(Player) }
+
+    before do
+      allow(player1).to receive(:choose_token)
+      allow(player2).to receive(:choose_token)
+      allow(game).to receive(:ask_name).twice
+    end
+
+    it 'sets token for both players' do
+      expect(player1).to receive(:choose_token).with(1)
+      expect(player2).to receive(:choose_token).with(2)
+      game.set_names(player1, player2)
+    end
+  end
+
   describe 'ask_name' do
     let(:player1) { instance_double(Player) }
 
