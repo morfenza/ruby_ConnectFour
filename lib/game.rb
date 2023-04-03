@@ -26,6 +26,11 @@ class Game
     end
   end
 
+  def play_round(player1 = self.player1, player2 = self.player2, board = self.board)
+    return 1 if play_turn(player1, board) == true
+    return 2 if play_turn(player2, board) == true
+  end
+
   def set_names(player1 = self.player1, player2 = self.player2)
     ask_name(player1, 1)
     player1.choose_token(1)
