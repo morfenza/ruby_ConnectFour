@@ -110,6 +110,33 @@ describe Game do
     end
   end
 
+  describe '#draw' do
+    context 'when given a full board' do
+      let(:full_board) { instance_double(Board) }
+
+      it 'returns true' do
+        allow(full_board).to receive(:rack).and_return(
+          [
+            [1, 2, 1, 2, 1, 2, 1],
+            [2, 1, 2, 1, 2, 1, 2],
+            [2, 1, 2, 1, 2, 1, 2],
+            [2, 1, 2, 1, 2, 1, 2],
+            [1, 2, 1, 2, 1, 2, 1],
+            [2, 1, 2, 1, 2, 1, 2]
+          ]
+        )
+        expect(game.draw?(full_board)).to be true
+      end
+    end
+
+    context 'when given a non-full board' do
+      it 'returns nil' do
+        allow(board).to receive(:rack).and_return(Array.new(6) { Array.new(7, 0) })
+        expect(game.draw?(board)).to be_nil
+      end
+    end
+  end
+
   describe '#horizontal?' do
     context 'when there are tokens in a horizontal line' do
       it 'returns true' do

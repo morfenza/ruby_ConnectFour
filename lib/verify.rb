@@ -8,6 +8,15 @@ module Verify
       diagonal?(token, board, row_index, column_index)
   end
 
+  def draw?(board)
+    board.rack.each do |row|
+      row.each do |column|
+        return nil if column.zero?
+      end
+    end
+    true
+  end
+
   # Checks for horizontal connections on given token
   def horizontal?(token, board, row_index, column_index)
     pivot = column_index + 3
