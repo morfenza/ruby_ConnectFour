@@ -23,8 +23,9 @@ class Game
     welcoming_message
     set_names(player1, player2)
 
+    board.display_rack
+    
     loop do
-      board.display_rack
       result = play_round(player1, player2, board)
       if result == 1
         board.display_rack
