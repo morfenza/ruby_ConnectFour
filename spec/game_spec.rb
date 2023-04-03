@@ -2,11 +2,51 @@
 
 require './lib/game'
 require './lib/board'
+require './lib/player'
 
 describe Game do
   subject(:game) { described_class.new }
   let(:board) { instance_double(Board) }
   let(:cur_player) { double('Ian') }
+
+  describe '#new_game' do
+    it 'creates board object' do
+      expect(Board).to receive(:new)
+      game.new_game
+    end
+
+    it 'creates player objects' do
+      expect(Player).to receive(:new).twice
+      game.new_game
+    end
+  end
+
+  describe 'ask_name' do
+    let(:player1) { instance_double(Player) }
+
+    before do
+      allow(game).to receive(:puts)
+    end
+
+    context 'when given valid input' do
+      it 'returns the input' do
+        result = 'Inha'
+        player_token = 1
+        allow(player1).to receive(:give_name).and_return('Inha')
+        expect(game.ask_name(player1, player_token)).to eq(result)
+      end
+    end
+
+    context 'when given invalid input' do
+      it 'puts error message once' do
+        player_token = 1
+        error_message = 'Invalid name, please input a valid one'
+        allow(player1).to receive(:give_name).and_return(nil, 'Inha')
+        expect(game).to receive(:puts).with(error_message).once
+        game.ask_name(player1, player_token)
+      end
+    end
+  end
 
   describe '#horizontal?' do
     context 'when there are tokens in a horizontal line' do
