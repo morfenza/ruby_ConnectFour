@@ -4,7 +4,7 @@
 class Board
   attr_reader :rack
 
-  def create_rack
+  def initialize
     @rack = Array.new(6) { Array.new(7, 0) }
   end
 
