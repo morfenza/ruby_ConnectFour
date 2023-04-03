@@ -16,7 +16,7 @@ class Game
     @player2 = Player.new
   end
 
-  def set_names(player1, player2)
+  def set_names(player1 = self.player1, player2 = self.player2)
     ask_name(player1, 1)
     player1.choose_token(1)
 

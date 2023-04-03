@@ -21,6 +21,8 @@ describe Game do
     end
   end
 
+  
+
   describe 'set_names' do
     let(:player1) { instance_double(Player) }
     let(:player2) { instance_double(Player) }
