@@ -28,13 +28,16 @@ class Game
       result = play_round(player1, player2, board)
       if result == 1
         board.display_rack
-        return display_player_victory(player1.name, player1.token)
+        display_player_victory(player1.name, player1.token)
+        break
       elsif result == 2
         board.display_rack
-        return display_player_victory(player2.name, player2.token)
+        display_player_victory(player2.name, player2.token)
+        break
       elsif draw?(board)
         board.display_rack
-        return display_draw_message
+        display_draw_message
+        break
       end
     end
   end
@@ -84,6 +87,3 @@ class Game
     end
   end
 end
-
-g = Game.new
-g.play_game
