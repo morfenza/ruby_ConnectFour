@@ -21,7 +21,51 @@ describe Game do
     end
   end
 
-  describe 'set_names' do
+  describe '#play_turn' do
+    let(:player1) { instance_double(Player, token: 1) }
+
+    context 'when one turn is played' do
+      context 'when token is inserted for a given player' do
+        before do
+          available_row = 1
+          chosen_column = 1
+          allow(game).to receive(:game_over?).with(player1.token, board, available_row, chosen_column)
+        end
+
+        context 'when given valid column' do
+          before do
+            allow(game).to receive(:gets).and_return(1)
+            allow(board).to receive(:insert_token).with(player1.token, 1).and_return([1, 1])
+          end
+
+          it 'inserts token' do
+            expect(board).to receive(:insert_token).with(player1.token, 1).and_return([1, 1])
+            game.play_turn(player1, board)
+          end
+
+          it 'checks for victory' do
+            expect(game).to receive(:game_over?).with(player1.token, board, 1, 1)
+            game.play_turn(player1, board)
+          end
+        end
+
+        context 'when given invalid column' do
+          before do
+            allow(game).to receive(:gets).and_return(89, 1)
+            allow(board).to receive(:insert_token).and_return(nil, [1, 1])
+          end
+
+          it 'puts error message once' do
+            error_message = 'Please choose a valid column'
+            expect(game).to receive(:puts).with(error_message).once
+            game.play_turn(player1, board)
+          end
+        end
+      end
+    end
+  end
+
+  describe '#set_names' do
     let(:player1) { instance_double(Player) }
     let(:player2) { instance_double(Player) }
 
@@ -38,7 +82,7 @@ describe Game do
     end
   end
 
-  describe 'ask_name' do
+  describe '#ask_name' do
     let(:player1) { instance_double(Player) }
 
     before do

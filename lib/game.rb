@@ -16,6 +16,16 @@ class Game
     @player2 = Player.new
   end
 
+  def play_turn(player, board = self.board)
+    loop do
+      location = board.insert_token(player.token, gets.to_i)
+
+      return game_over?(player.token, board, location[0], location[1]) unless location.nil?
+
+      puts 'Please choose a valid column'
+    end
+  end
+
   def set_names(player1 = self.player1, player2 = self.player2)
     ask_name(player1, 1)
     player1.choose_token(1)
