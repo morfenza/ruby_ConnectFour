@@ -21,8 +21,6 @@ describe Game do
     end
   end
 
-  
-
   describe 'set_names' do
     let(:player1) { instance_double(Player) }
     let(:player2) { instance_double(Player) }
@@ -45,6 +43,7 @@ describe Game do
 
     before do
       allow(game).to receive(:puts)
+      allow(game).to receive(:gets)
     end
 
     context 'when given valid input' do

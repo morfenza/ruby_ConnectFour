@@ -27,7 +27,10 @@ class Game
   def ask_name(player, player_num)
     puts "Player #1#{player_num}, enter your name: "
     loop do
-      name = player.give_name(gets.chomp)
+      input = gets
+      input ||= ''
+      input = input.chomp
+      name = player.give_name(input)
 
       return name unless name.nil?
 
