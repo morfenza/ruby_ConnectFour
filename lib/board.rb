@@ -18,6 +18,7 @@ class Board
     row += 1 while already_taken?(row, column)
 
     @rack[row][column] = token
+    [row, column]
   end
 
   def valid_input?(column)
